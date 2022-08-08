@@ -1,0 +1,7 @@
+{
+    "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+    "css.completion.completePropertyWithSemicolon": false,
+    "less.completion.completePropertyWithSemicolon": false,
+    "scss.completion.completePropertyWithSemicolon": false,
+    "editor.acceptSuggestionOnCommitCharacter": false
+}

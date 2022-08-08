@@ -1,0 +1,185 @@
+body {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(60, 60, 60);
+    font-family: Roboto,Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+}
+
+#title {
+    margin:5px;  
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    font-weight: bold;
+    color:rgb(0, 170, 170);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    background-color: rgb(4, 32, 32);
+    padding:15px 150px;
+    border: 1px solid black;
+}
+#subtitle{
+    font-size: 25px;
+}   
+
+#play {
+    width:100px;
+    height:100px;
+    background-color: darkcyan;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    color:snow;
+    border-radius: 10%;
+    margin:10px;
+    cursor: pointer;
+    user-select: none;
+    border:3px solid transparent;
+}
+
+
+#icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    gap:10px;
+    padding: 10px;
+    opacity: 0.1;
+    margin:0px 0px 25px;
+    cursor: pointer;
+}
+
+div.text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 30px;
+    color:transparent; 
+}
+
+.hoverno {
+    opacity: 0.25;
+}
+.hoveroff {
+    opacity: 1;
+
+}
+#random {
+    display:flex;
+    width:180px;
+    height:180px;    
+    background-color: rgb(60, 60, 60);
+    padding:10px;
+}
+#imagerandom {
+    display:flex;
+}
+
+
+#opponentText {
+    user-select: none;
+}
+
+#ontop {
+    position:absolute;
+    width:580px;
+    height: 200px;
+    background-color: rgb(4,32,32);
+    top: 320px;
+    border-radius: 10px;
+    z-index: -1;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:snow;
+}
+#result {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    padding: 10px 0px 2px;
+    font-size: 35px;
+    font-weight: bold;
+}
+#scorecontainer2 {
+    display:flex;
+    gap:0px 50px;
+    color:cyan;
+    text-align: center;
+    font-size: 25px;
+}
+#playerscore {
+    width:200px;
+}
+#opponentscore {
+    width:200px;
+}
+#score {
+    font-size: 25px;
+    text-align: center;
+}
+#reroll {
+    font-size: 35px;
+    text-align: center;
+    width:150px;
+    height: 70px;
+    display: none;
+    margin:5px;
+    cursor: pointer;
+    user-select: none;
+    background-color: rgb(160, 150, 140);
+    color:black;
+    margin:3px solid transparent;
+}
+
+#final {
+    position:absolute;
+    width:600px;
+    height: 550px;
+    background-color: rgb(4,32,32);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+#finalcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:snow;
+    text-align: center;
+    font-size: 40px;
+}
+#finaltxt {
+    top:0px;
+    justify-content: center;
+    align-items: center;
+    padding:30px;
+    margin:0px 0px 40px;
+}
+#finalbtn {
+    display: flex;
+    background-color: rgb(160,160,160);
+    width:200px;
+    height: 200px;
+    border:3px solid transparent;
+    border-radius: 10px;
+    color:black;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    user-select: none;
+    cursor:pointer;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RPS</title>
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="title">Rock Paper Scissors
+            <div id="subtitle">Best of 5!</div>
+        </div>
+        <div id="play" onmouseover="this.style.border = '3px solid yellow'" onmouseout="this.style.border = '3px solid transparent'">Play</div>
+        <div id="choose" class="text">Choose wisely:</div>
+        <div id="icons">
+            <div id="rock"><img src="img\Rock.png" class="images" id="imagerock" draggable="false"></div>
+            <div id="paper"><img src="img\Paper.png" class="images" id="imagepaper" draggable="false"></div>
+            <div id="scissors"><img src="img\Scissors.png" class="images" id="imagescissors" draggable="false"></div>
+        </div>
+        <div id="opponentText" class="text">Opponent:</div>
+        <div id=random><img id="imagerandom" draggable="false"></div>
+        <!-- <div id="score">
+            <div id="player">You: </div>
+            <div id="opponent">Opponent:</div>
+        </div> -->
+        <div id="ontop">
+            <div id="container">
+                <div id="result"></div>
+                <div id="scorecontainer">
+                    <div id="score"></div>
+                    <div id="scorecontainer2">
+                        <div id="playerscore"></div>
+                        <div id="opponentscore"></div>
+                    </div>
+                    
+                </div>
+                <div id="reroll">OK</div>
+            </div>
+            
+        </div>
+        <div id="final">
+            <div id="finalcontainer">
+                <div id="finaltxt"></div>
+                <div id="finalbtn"></div>
+            </div>
+            
+        </div>
+
+    </body>
+</html>
