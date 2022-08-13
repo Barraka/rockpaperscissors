@@ -1,6 +1,6 @@
-let img1=document.querySelector("#rock");
-let img2=document.querySelector("#paper");
-let img3=document.querySelector("#scissors");
+let rock=document.querySelector("#rock");
+let paper=document.querySelector("#paper");
+let scissors=document.querySelector("#scissors");
 let img4=document.querySelector("#imagerandom");
 let para=document.querySelector("#icons");
 let play=document.querySelector("#play");
@@ -16,41 +16,91 @@ let opponentscore=document.querySelector("#opponentscore");
 let final=document.querySelector("#final");
 let finaltxt=document.querySelector("#finaltxt");
 let finalbtn=document.querySelector("#finalbtn");
+
+document.body.removeChild(ontop);
+document.body.removeChild(final);
  
 play.addEventListener("click",start);
+play.addEventListener('mouseover',()=>{
+    play.classList.add('play-hover')
+});
+play.addEventListener('mouseout',()=>{
+    play.classList.remove('play-hover')
+});
+
 reroll.addEventListener("click",nextroll);
-reroll.addEventListener("mouseover",nexthover);
-reroll.addEventListener("mouseout",nextout);
+reroll.addEventListener("mouseover",()=>{
+    reroll.classList.add('reroll-hover')
+});
+reroll.addEventListener("mouseout",()=>{
+    reroll.classList.remove('reroll-hover')
+});
+
 let rolls=["img/Rock.png","img/Paper.png","img/Scissors.png"]
 let index=0;
 let myInterval;
 let date;
 let hasstarted=false;
+//Create placeholder for start button that will dissapear during a game
+let replace=document.createElement('div');
+replace.id="tempID";
+replace.style.cssText='width:100px; height:100px; background-color: transparent; display:flex; margin:13px';
 
 //Declare global variables for score tracking
 let playerScore = 0;
 let opponentScore = 0;
 let currentChoice = '';
-let maxScore=3;
+let maxScore=1;
 
+//----
+rock.addEventListener('mouseover',e=>{iconsHoverOver(e)});
+rock.addEventListener('mouseout',e=>{iconsHoverOut(e)});
+rock.addEventListener('click',e=>{roll(e)});
+paper.addEventListener('mouseover',e=>{iconsHoverOver(e)});
+paper.addEventListener('mouseout',e=>{iconsHoverOut(e)});
+paper.addEventListener('click',e=>{roll(e)});
+scissors.addEventListener('mouseover',e=>{iconsHoverOver(e)});
+scissors.addEventListener('mouseout',e=>{iconsHoverOut(e)});
+scissors.addEventListener('click',e=>{roll(e)});
+
+finalbtn.addEventListener("click",reset);
+final.addEventListener('transitionstart',()=> console.log('started transitioning'));
+
+//para.addEventListener('click',e=>{iconsClick(e)});
+
+function iconsHoverOver(e) {
+    if(!hasstarted)return;
+    let target=e.target.id;
+    if(target==='imagerock')manageHover('hoverno',paper,scissors);
+    if(target==='imagepaper')manageHover('hoverno',rock,scissors);
+    if(target==='imagescissors')manageHover('hoverno',rock,paper);
+}
+function iconsHoverOut(e) {
+    if(!hasstarted)return;
+    let target=e.target.id;
+    if(target==='imagerock')manageHover('hoveroff',paper,scissors);
+    if(target==='imagepaper')manageHover('hoveroff',rock,scissors);
+    if(target==='imagescissors')manageHover('hoveroff',rock,paper);
+}
+function manageHover(applyclass,...icons) {
+    icons.forEach(x=>x.className=applyclass);
+}
 
 //-----------------------
 function displayFinal() {
-    final.style.display="flex";
+    document.body.appendChild(final);
     img4.src="";
     random.style.backgroundColor="rgb(60,60,60)";
     if(playerScore==maxScore) finaltxt.innerHTML=`${playerScore} - ${opponentScore} <br>Nice, you won the game!!`;
     else finaltxt.innerHTML=`${playerScore} - ${opponentScore} <br>Sorry, you lost the game...`;
     if(playerScore>opponentScore)final.style.border="3px solid lime";
     else final.style.border="3px solid red";
-    finalbtn.textContent="OK";
-    finalbtn.addEventListener("mouseover",()=>{finalbtn.style.border="3px solid lime";finalbtn.style.backgroundColor="white";});
-    finalbtn.addEventListener("mouseout",()=>{finalbtn.style.border="3px solid transparent";finalbtn.style.backgroundColor="rgb(160,160,160)";});
-    finalbtn.addEventListener("click",reset);
 }
 
 function reset() {
-    final.style.display="none";
+    document.body.removeChild(final);
+    // final.classList.remove('final-start');
+    replace.parentElement.replaceChild(play,replace);
     playerScore=0;
     opponentScore=0;
     hasstarted=false;
@@ -58,38 +108,39 @@ function reset() {
     result.textContent="";
     text1.style.color="transparent";
     text2.style.color="transparent";
-    play.style.cursor="pointer";
-    ontop.style.zIndex=-1;
+    // play.style.cursor="pointer";
     }
 
 function nextroll() {
     if(!hasstarted)return;
+    reroll.classList.remove('reroll-hover')
+    document.body.removeChild(ontop);
     myInterval=setInterval(changeme,150);
-    hideScore();
 }
-function nexthover() {
-    if(!hasstarted)return;
-    reroll.style.border="3px solid yellow";
-    reroll.style.backgroundColor="white";
-}
-function nextout() {
-    if(!hasstarted)return;
-    reroll.style.border="3px solid transparent";
-    reroll.style.backgroundColor='rgb(160,150,140)';
-}
-function roll() {
+
+function roll(e) {
     if(!hasstarted)return;
     clearInterval(myInterval);
     let currentRoll=getComputerChoice();
     switch (currentRoll) {
-        case 'rock':
+        case "rock":
             img4.src=rolls[0];
             break;
-        case 'paper':
+        case "paper":
             img4.src=rolls[1];
             break;
         default:
             img4.src=rolls[2];
+    }
+    switch (e.target.id) {
+        case 'imagerock':
+            currentChoice='rock';
+            break;
+        case 'imagepaper':
+            currentChoice='paper';
+            break;
+        default:
+            currentChoice='scissors';
     }
     
     let getText=playGame(currentChoice,currentRoll);
@@ -101,74 +152,24 @@ function roll() {
                                      
 }
 function showScore() {
-    ontop.style.zIndex=1;
-    score.innerHTML="Score:";
+    document.body.appendChild(ontop);
     playerscore.textContent="You: " + playerScore;
     opponentscore.textContent="Opponent: " + opponentScore;
-    reroll.style.display="flex";
-    reroll.style.justifyContent="center";
-    reroll.style.alignItems="center";
-    reroll.style.backgroundColor='rgb(160,150,140)';
-    reroll.style.borderRadius="10px";
-}
-function hideScore() {
-    ontop.style.zIndex=-1;
-    score.innerHTML="";
-    playerscore.textContent="" ;
-    opponentscore.textContent="";
-    reroll.style.display="none";
 }
 
-function hoverRock() {
-    if(!hasstarted)return;
-    img2.className="hoverno";
-    img3.className="hoverno";
-    currentChoice="rock";
-}
-function hoverPaper() {
-    if(!hasstarted)return;
-    img1.className="hoverno";
-    img3.className="hoverno";
-    currentChoice="paper";
-}
-function hoverScissors() {
-    if(!hasstarted)return;
-    img1.className="hoverno";
-    img2.className="hoverno";
-    currentChoice="scissors";
-}
-function outRock() {
-    if(!hasstarted)return;
-    img2.className="hoveroff";
-    img3.className="hoveroff";
-}
-function outPaper() {
-    if(!hasstarted)return;
-    img1.className="hoveroff";
-    img3.className="hoveroff";
-}
-function outScissors() {
-    if(!hasstarted)return;
-    img1.className="hoveroff";
-    img2.className="hoveroff";
-}
-function start() {
-    if(hasstarted)return;
+function start() {    
+    play.parentElement.replaceChild(replace,play);
+    play.classList.remove('play-hover')
+    // if(hasstarted)return;
     hasstarted=true;
     para.style.opacity=1;
-    play.style.cursor="progress";
+    // play.style.cursor="progress";
     random.style.backgroundColor='white';    
     random.style.color="white";
     text1.style.color="cyan";
     text2.style.color="cyan";
     myInterval=setInterval(changeme,150);
-    img1.addEventListener('mouseover',()=>hoverRock());
-    img1.addEventListener('mouseout',()=>outRock());
-    img2.addEventListener('mouseover',()=>hoverPaper());
-    img2.addEventListener('mouseout',()=>outPaper());
-    img3.addEventListener('mouseover',()=>hoverScissors());
-    img3.addEventListener('mouseout',()=>outScissors());
-    para.addEventListener("click",roll);
+
 }
 function changeme() {
     img4.src=rolls[index];
@@ -176,13 +177,13 @@ function changeme() {
 }
 
 function getComputerChoice() {
-    if(!hasstarted)return;
+    // if(!hasstarted)return;
     let choice=["rock","paper","scissors"];
     return choice[Math.floor(Math.random()*3)];
 }
 
 function playGame(choice="rock", opponent=getComputerChoice()) {
-    if(!hasstarted)return;
+    // if(!hasstarted)return;
     switch (choice) {
         case 'rock' : 
             switch (opponent) {
