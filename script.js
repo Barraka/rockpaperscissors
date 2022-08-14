@@ -17,24 +17,12 @@ let final=document.querySelector("#final");
 let finaltxt=document.querySelector("#finaltxt");
 let finalbtn=document.querySelector("#finalbtn");
 
+//Removing future pop-up windows
 document.body.removeChild(ontop);
 document.body.removeChild(final);
  
 play.addEventListener("click",start);
-play.addEventListener('mouseover',()=>{
-    play.classList.add('play-hover')
-});
-play.addEventListener('mouseout',()=>{
-    play.classList.remove('play-hover')
-});
-
 reroll.addEventListener("click",nextroll);
-reroll.addEventListener("mouseover",()=>{
-    reroll.classList.add('reroll-hover')
-});
-reroll.addEventListener("mouseout",()=>{
-    reroll.classList.remove('reroll-hover')
-});
 
 let rolls=["img/Rock.png","img/Paper.png","img/Scissors.png"]
 let index=0;
@@ -50,7 +38,7 @@ replace.style.cssText='width:100px; height:100px; background-color: transparent;
 let playerScore = 0;
 let opponentScore = 0;
 let currentChoice = '';
-let maxScore=1;
+let maxScore=5;
 
 //----
 rock.addEventListener('mouseover',e=>{iconsHoverOver(e)});
@@ -62,11 +50,8 @@ paper.addEventListener('click',e=>{roll(e)});
 scissors.addEventListener('mouseover',e=>{iconsHoverOver(e)});
 scissors.addEventListener('mouseout',e=>{iconsHoverOut(e)});
 scissors.addEventListener('click',e=>{roll(e)});
-
 finalbtn.addEventListener("click",reset);
 final.addEventListener('transitionstart',()=> console.log('started transitioning'));
-
-//para.addEventListener('click',e=>{iconsClick(e)});
 
 function iconsHoverOver(e) {
     if(!hasstarted)return;
@@ -99,7 +84,6 @@ function displayFinal() {
 
 function reset() {
     document.body.removeChild(final);
-    // final.classList.remove('final-start');
     replace.parentElement.replaceChild(play,replace);
     playerScore=0;
     opponentScore=0;
@@ -108,7 +92,6 @@ function reset() {
     result.textContent="";
     text1.style.color="transparent";
     text2.style.color="transparent";
-    // play.style.cursor="pointer";
     }
 
 function nextroll() {
@@ -160,10 +143,8 @@ function showScore() {
 function start() {    
     play.parentElement.replaceChild(replace,play);
     play.classList.remove('play-hover')
-    // if(hasstarted)return;
     hasstarted=true;
     para.style.opacity=1;
-    // play.style.cursor="progress";
     random.style.backgroundColor='white';    
     random.style.color="white";
     text1.style.color="cyan";
@@ -177,13 +158,11 @@ function changeme() {
 }
 
 function getComputerChoice() {
-    // if(!hasstarted)return;
     let choice=["rock","paper","scissors"];
     return choice[Math.floor(Math.random()*3)];
 }
 
 function playGame(choice="rock", opponent=getComputerChoice()) {
-    // if(!hasstarted)return;
     switch (choice) {
         case 'rock' : 
             switch (opponent) {

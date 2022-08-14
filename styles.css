@@ -41,13 +41,10 @@ body {
     margin:10px;
     cursor: pointer;
     user-select: none;
-}
-
-.play-normal {
     border: 3px solid transparent;
 }
 
-.play-hover {
+#play:hover {
     border: 3px solid yellow;
 }
 
@@ -149,12 +146,11 @@ div.text {
     justify-content:center;
     align-items:center;
     border-radius:10px;
-}
-.reroll-normal{
     background-color: rgb(160, 150, 140);
     border:3px solid transparent;
 }
-.reroll-hover {
+
+#reroll:hover {
     background-color: white;
     border:3px solid yellow;
 }
